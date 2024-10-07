@@ -40,4 +40,4 @@ app.get("/users", async (req, res) => {
     dataUser,
   });
 });
-</div> <div style="flex: 1; text-align: right;"> <img src="./assets/0.View-user.png" alt="User View" width="300" height="300"> </div> </div> ```
+</div> <div style="flex: 1; text-align: right;"> <img src="./assets/0.View-user.png" alt="User View" width="350" height="350"> </div> </div> ```
