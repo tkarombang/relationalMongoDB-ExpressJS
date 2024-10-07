@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>update</title>
+  </head>
+  <body>
+    <h1>UPDATE COMMENT</h1>
+    <form action="/comments/update/<%= commentUpdate.id %>?_method=PATCH" method="post">
+      <div class="user">
+        <label for="username" name="username">Username</label>
+        <input type="text" name="username" placeholder="<%= commentUpdate.username %>" disabled />
+      </div>
+      <div class="text-comment">
+        <label for="username" name="text">Write Comment</label>
+        <textarea type="text" name="text" cols="30" rows="5"><%= commentUpdate.text %></textarea>
+      </div>
+      <button type="submit">UPDATE</button>
+      <a href="/comments">&laquo;Back</a>
+    </form>
+  </body>
+</html>

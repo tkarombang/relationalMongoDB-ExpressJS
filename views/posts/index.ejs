@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>Articles</h1>
+    <ul>
+      <li><%= dataPost.title %></li>
+      <li><%= dataPost.author %></li>
+      <li><%= dataPost.slug %></li>
+      <p><%= dataPost.body %></p>
+    </ul>
+    <a href="/users">&laquo;USERS</a>
+    <h2>Author: <a href="/users/author/<%= dataPost.users._id %>">&laquo;<%= dataPost.users.name%></a></h2>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>Authors</h1>
+    <a href="/users/create">Tambah Authors</a>
+    <% if (dataUser.length < 1) { %>
+    <p>Data Users is Empty</p>
+    <% } else { %> <% dataUser.forEach(data => { %>
+    <ul>
+      <li>
+        <a href="/users/author/<%= data.id %>"><%= data.name %></a>
+      </li>
+    </ul>
+    <% }) %> <%}%>
+  </body>
+</html>

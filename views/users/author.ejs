@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= detailUser.name %></h1>
+    <ul>
+      <li><%= detailUser.username %></li>
+      <li><%= detailUser.email %></li>
+    </ul>
+    <h2>Posts</h2>
+    <ul>
+      <% detailUser.posts.forEach(postUser => { %>
+      <li><a href="/posts/<%= postUser._id %>"><%= postUser.title %></a></li>
+      <% }) %>
+    </ul>
+    <a href="/users/<%= detailUser._id %>/posts/create">Add Post</a>
+    <a href="/users">&laquo;Back</a>
+  </body>
+</html>
