@@ -41,3 +41,29 @@ app.get("/users", async (req, res) => {
 ```
 
 <img src="./assets/0.View-user.png" alt="User View" width="600" height="600"> </div> </div>
+
+```js
+// HALAMAN TAMBAH DATA USER
+app.get("/users/create", (req, res) => {
+  res.render("users/create", {
+    title: "Create Author",
+  });
+});
+// PROCESS CREATE DATA USER
+app.post("/users/create", async (req, res) => {
+  // const dataUser = new User(req.body);
+  // console.log(dataUser);
+  // await dataUser.save();
+  await User.insertMany(req.body);
+  res.redirect("/users");
+});
+```
+
+<div style="display: flex; align-items: center;">
+  <div style="flex: 1;">
+      <img src="./assets/1.add.png" alt="User View" width="300" height="300"> 
+  </div> 
+  <div style="flex: 1; text-align: right;">
+      <img src="./assets/2.add-form.png.png" alt="User View" width="300" height="300">
+  </div>
+</div>
