@@ -38,6 +38,5 @@ app.get("/users", async (req, res) => {
     dataUser,
   });
 });
-```
-
 <img align="right" width="300" height="300" src="./assets/0.View-user.png">
+```
