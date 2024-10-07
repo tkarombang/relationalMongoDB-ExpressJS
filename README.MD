@@ -30,6 +30,8 @@ Kelas ini cocok untuk:
 
 ## Screenshot
 
+<div style="display: flex; align-items: center;">
+  <div style="flex: 1">
 ```js
 app.get("/users", async (req, res) => {
   const dataUser = await User.find();
@@ -38,5 +40,9 @@ app.get("/users", async (req, res) => {
     dataUser,
   });
 });
-<img align="right" width="300" height="300" src="./assets/0.View-user.png">
 ```
+  </div>
+  <div style="flex: 1; text-align:right;">
+    <img align="right" width="300" height="300" src="./assets/0.View-user.png">
+  </div>
+</div>
