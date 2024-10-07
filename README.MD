@@ -31,7 +31,7 @@ Kelas ini cocok untuk:
 ## Screenshot
 
 <div style="display: flex; align-items: center;">
-  <div style="flex: 1">
+  <div style="flex: 1;">
 ```js
 app.get("/users", async (req, res) => {
   const dataUser = await User.find();
@@ -40,9 +40,4 @@ app.get("/users", async (req, res) => {
     dataUser,
   });
 });
-```
-  </div>
-  <div style="flex: 1; text-align:right;">
-    <img align="right" width="300" height="300" src="./assets/0.View-user.png">
-  </div>
-</div>
+</div> <div style="flex: 1; text-align: right;"> <img src="./assets/0.View-user.png" alt="User View" width="300" height="300"> </div> </div> ```
