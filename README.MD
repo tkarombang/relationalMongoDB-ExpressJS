@@ -61,9 +61,9 @@ app.post("/users/create", async (req, res) => {
 
 <div style="display: flex; align-items: center;">
   <div style="flex: 1;">
-      <img src="./assets/1.add.png" alt="User View" width="300" height="300"> 
+      <img src="./assets/1.add.png" alt="User View" width="300" height="350"> 
   </div> 
   <div style="flex: 1; text-align: right;">
-      <img src="./assets/2.add-form.png.png" alt="User View" width="300" height="300">
+      <img src="./assets/2.add-form.png" alt="User View" width="350" height="300">
   </div>
 </div>
