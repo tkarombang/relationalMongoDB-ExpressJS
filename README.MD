@@ -29,3 +29,15 @@ Kelas ini cocok untuk:
 7. **Memanfaatkan Middleware Schema Untuk Menghapus Data** _(06:60)_
 
 ## Screenshot
+
+```js
+app.get("/users", async (req, res) => {
+  const dataUser = await User.find();
+  res.render("users/index", {
+    title: "Index User",
+    dataUser,
+  });
+});
+```
+
+<img align="right" width="300" height="300" src="./assets/0.View-user.png">
