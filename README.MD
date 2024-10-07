@@ -61,11 +61,11 @@ app.post("/users/create", async (req, res) => {
 
 #### Add Author Page
 
-<div style="display: flex; align-items: center; justify-content: space-between;">
-  <div style="flex: 1">
-      <img src="/assets/1.add.png" alt="add" width="400" height="300"> 
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+  <div style="width: 50%; margin: 0; padding: 0;">
+      <img src="/assets/1.add.png" alt="add" width="350" height="300"> 
   </div> 
-  <div style="flex: 1; text-align: right;">
-      <img src="/assets/2.add-form.png" alt="add-form" width="400" height="300">
+  <div style="width: 50%; text-align: right; margin: 0; padding: 0;">
+      <img src="/assets/2.add-form.png" alt="add-form" width="350" height="300">
   </div>
 </div>
