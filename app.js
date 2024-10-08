@@ -129,6 +129,14 @@ app.get("/posts/:id", async (req, res) => {
   });
 });
 
+// DELETE AUTHOR AND POST
+app.delete("/users/:id", (req, res) => {
+  User.findOneAndDelete({ _id: req.params.id }).then((result) => {
+    res.redirect("/users");
+  });
+  // res.send(req.params.id);
+});
+
 // ***COMMENTS***
 app.get("/comments", (req, res) => {
   res.render("comments/index", { comments });

@@ -18,6 +18,10 @@
       <% }) %>
     </ul>
     <a href="/users/<%= detailUser._id %>/posts/create">Add Post</a>
+    <form action="/users/<%= detailUser._id %>?_method=DELETE" method="POST">
+      <input type="hidden" name="_id" value="<%= detailUser._id%>" />
+      <button type="submit">Delete</button>
+    </form>
     <a href="/users">&laquo;Back</a>
   </body>
 </html>
