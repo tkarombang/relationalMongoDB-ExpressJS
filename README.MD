@@ -64,4 +64,77 @@ app.post("/users/create", async (req, res) => {
 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
       <img src="/assets/1.add.png" alt="add"> 
       <img src="/assets/2.add-form.png" alt="add-form">
+      <img src="/assets/4.mongo.png" alt="add-form">
+  </div>
+
+#### Create Post
+
+```js
+// CREATE POST BY USER
+app.get("/users/:id/posts/create", async (req, res) => {
+  const userId = await User.findOne({ _id: req.params.id });
+  res.render("posts/create", {
+    title: "Create Post",
+    userId,
+  });
+});
+// PROCESS CREATE POST BY USER
+app.post("/users/:id/posts/create", async (req, res) => {
+  const author = await User.findOne({ _id: req.params.id });
+  const article = new Post(req.body);
+
+  author.posts.push(article);
+  article.users = author;
+  await author.save();
+  await article.save();
+  console.log(author);
+  res.redirect(`/users/author/${author._id}`);
+});
+// DETAIL POSTS BY USER
+app.get("/posts/:id", async (req, res) => {
+  const dataPost = await Post.findOne({ _id: req.params.id }).populate("users");
+  res.render("posts/index", {
+    title: "Articles",
+    dataPost,
+  });
+});
+```
+
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <img src="/assets/create/beforeCreatePost.png" alt="add"> 
+      <img src="/assets/create/processCreatePost.png" alt="add"> 
+      <img src="/assets/create/afterCreatePost.png" alt="add"> 
+      <img src="/assets/create/viewPost.png" alt="add"> 
+      <img src="/assets/create/viewPost.png" alt="add"> 
+  </div>
+
+#### When Delete Author, the Post is Also Deleted
+
+```js
+app.delete("/users/:id", (req, res) => {
+  User.findOneAndDelete({ _id: req.params.id }).then((result) => {
+    res.redirect("/users");
+  });
+});
+
+//SCHEMA USER.JS
+userSchema.post("findOneAndDelete", async function (users) {
+  if (users.posts.length) {
+    const res = await Post.deleteMany({ _id: { $in: users.posts } });
+    console.log(res);
+  }
+});
+```
+
+##### Before
+
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <img src="/assets/delete/beforeDelete.png" alt="add">
+      <img src="/assets/delete/beforeDeleteAuthor.png" alt="add">
+  </div>
+
+##### After
+
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <img src="/assets/delete/afterDelete.png" alt="add">
   </div>
