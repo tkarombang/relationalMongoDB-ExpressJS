@@ -117,7 +117,9 @@ app.delete("/users/:id", (req, res) => {
   });
 });
 
-//SCHEMA USER.JS
+// SCHEMA USER.JS
+// LINK POST MIDDLEWARE -  MONGOOSE
+// https://mongoosejs.com/docs/middleware.html#post
 userSchema.post("findOneAndDelete", async function (users) {
   if (users.posts.length) {
     const res = await Post.deleteMany({ _id: { $in: users.posts } });
