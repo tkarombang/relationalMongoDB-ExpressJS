@@ -30,13 +30,28 @@ const flash = require("connect-flash");
 app.use(cookieParser("secret"));
 app.use(
   session({
-    cookie: { maxAge: 6000 },
     secret: "secret",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false },
   }),
 );
 app.use(flash());
+
+const beforeLogin = (req, res, next) => {
+  if (!req.session.User_id) {
+    return res.redirect("/login");
+  } else {
+    next();
+  }
+};
+function isAuthenticated(req, res, next) {
+  if (req.session.User_id) {
+    next();
+  } else {
+    return res.redirect("/login");
+  }
+}
 
 //DATA DUMMY
 let comments = [
@@ -61,8 +76,26 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+//***LOGIN PAGE***
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Login Page",
+  });
+});
+//LOGIN PROCESS
+app.post("/login", async (req, res) => {
+  const dataAuthor = await User.findOne({ username: req.body.username, password: req.body.password });
+  if (dataAuthor) {
+    req.session.User_id = dataAuthor._id;
+    console.log("Session User ID after Login: ", req.session.User_id);
+    res.redirect(`/users/author/${dataAuthor._id}`);
+  } else {
+    res.redirect("/login");
+  }
+});
+
 // ***USERS***
-app.get("/users", async (req, res) => {
+app.get("/users", beforeLogin, async (req, res) => {
   const dataUser = await User.find();
   res.render("users/index", {
     title: "Index User",
@@ -71,7 +104,7 @@ app.get("/users", async (req, res) => {
 });
 
 // HALAMAN TAMBAH DATA USER
-app.get("/users/create", (req, res) => {
+app.get("/users/create", beforeLogin, (req, res) => {
   res.render("users/create", {
     title: "Create Author",
   });
@@ -86,11 +119,13 @@ app.post("/users/create", async (req, res) => {
 });
 
 // HALAMAN DETAIL USER
-app.get("/users/author/:id", async (req, res) => {
+app.get("/users/author/:id", isAuthenticated, async (req, res) => {
   // const { id } = req.params;
   // const detailUser = await User.findById(id)
   const detailUser = await User.findOne({ _id: req.params.id }).populate("posts");
-  // res.send(detailUser);
+  if (req.session.User_id !== req.params.id) {
+    return res.status(404).send("Access Denied, You cannot view other users profiles.");
+  }
   res.render("users/author", {
     title: "Author",
     detailUser,
