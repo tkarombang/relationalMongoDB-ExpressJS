@@ -123,6 +123,7 @@ app.get("/users/author/:id", isAuthenticated, async (req, res) => {
   // const { id } = req.params;
   // const detailUser = await User.findById(id)
   const detailUser = await User.findOne({ _id: req.params.id }).populate("posts");
+  console.log(req.session.User_id);
   if (req.session.User_id !== req.params.id) {
     return res.status(404).send("Access Denied, You cannot view other users profiles.");
   }
@@ -134,8 +135,11 @@ app.get("/users/author/:id", isAuthenticated, async (req, res) => {
 
 // ***POSTS***
 // CREATE POST BY USER
-app.get("/users/:id/posts/create", async (req, res) => {
+app.get("/users/:id/posts/create", isAuthenticated, async (req, res) => {
   const userId = await User.findOne({ _id: req.params.id });
+  if (req.session.User_id !== req.params.id) {
+    return res.status(404).send("Access Denied...");
+  }
   res.render("posts/create", {
     title: "Create Post",
     userId,
@@ -157,6 +161,9 @@ app.post("/users/:id/posts/create", async (req, res) => {
 // DETAIL POSTS BY USER
 app.get("/posts/:id", async (req, res) => {
   const dataPost = await Post.findOne({ _id: req.params.id }).populate("users");
+  if (req.session.User_id !== dataPost.users._id.toString()) {
+    return res.status(404).send("Access Denied, You cannot view other Article.");
+  }
   // res.send(dataPost);
   res.render("posts/index", {
     title: "Articles",
